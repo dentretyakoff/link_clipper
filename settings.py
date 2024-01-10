@@ -9,6 +9,13 @@ ALPHABET_FOR_SHORT_URL = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
                           'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
                           'Y', 'Z']
 
+# Параметры для валидации
+REG_EXP_SHORT_ID = r'^[a-zA-Z0-9]{1,6}$'
+MAX_LEN_ORIGINAL = 2000
+MAX_LEN_SHORT = 6
+MIN_LEN_ORIGINAL = 1
+MIN_LEN_SHORT = 1
+
 
 class Config(object):
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI')
