@@ -1,9 +1,8 @@
 # yacut/yacut/views.py
 
 import random
-from http import HTTPStatus
 
-from flask import abort, render_template, flash, redirect
+from flask import render_template, flash, redirect
 
 from . import app, db
 from .forms import URLForm
@@ -26,21 +25,20 @@ def get_unique_short_id() -> str:
 @app.route('/', methods=['GET', 'POST'])
 def index_view():
     form = URLForm()
-    if form.validate_on_submit():
-        if URLMap.query.filter_by(short=form.custom_id.data).first():
-            flash('Предложенный вариант короткой ссылки уже существует.')
-        else:
-            short = form.custom_id.data or get_unique_short_id()
-            url_map = URLMap(original=form.original_link.data, short=short)
-            db.session.add(url_map)
-            db.session.commit()
-            return render_template('index.html', form=form, short=short)
+    if not form.validate_on_submit():
+        return render_template('index.html', form=form)
+    if URLMap.query.filter_by(short=form.custom_id.data).first():
+        flash('Предложенный вариант короткой ссылки уже существует.')
+    else:
+        short = form.custom_id.data or get_unique_short_id()
+        url_map = URLMap(original=form.original_link.data, short=short)
+        db.session.add(url_map)
+        db.session.commit()
+        return render_template('index.html', form=form, short=short)
     return render_template('index.html', form=form)
 
 
 @app.route('/<path:short>', methods=['GET'])
 def redirect_view(short):
-    original_url = URLMap.query.filter_by(short=short).first()
-    if original_url:
-        return redirect(original_url.original)
-    abort(HTTPStatus.NOT_FOUND)
+    return redirect(
+        URLMap.query.filter_by(short=short).first_or_404().original)
