@@ -2,7 +2,7 @@
 Укоротитель ссылок на фреймворке Flask.
 
 ## Установка и настройка
-- Клонируйте репозиторий: `git clone git@github.com:dentretyakoff/yacut.git`
+- Клонируйте репозиторий: `git clone git@github.com:dentretyakoff/link_clipper.git`
 - Перейдите в директорию проекта: `cd ваш-репозиторий`
 - Создайте и активируйте виртуальное окружение:\
   Linux `python3 -m venv venv && source venv/bin/activate`\
