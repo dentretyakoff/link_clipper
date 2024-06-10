@@ -1,5 +1,5 @@
-# YaCut
-Укоротитель ссылок YaCut на фреймворке Flask.
+# Link Clipper
+Укоротитель ссылок на фреймворке Flask.
 
 ## Установка и настройка
 - Клонируйте репозиторий: `git clone git@github.com:dentretyakoff/yacut.git`
